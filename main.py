@@ -22,7 +22,7 @@ def runcode (allcode):
 runcode(open('test.txt'))
 
 #run_itype("       lw 1 2 3")
-
+#Teatgit
 
 
 
