@@ -7,14 +7,15 @@ def runcode (allcode):
     for i in allcode.readlines():
         print(i)
         label =i.split()
-        if label[0] or label[1] == "and" or "nand":
+        if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
+            o_ty.run_o(i)
+        elif (label[0] == "add" or label[1] == "add") or (label[0] == "nand" or label[1] == "nand"):
             r_ty.run_r(i)
         elif label[0] or label[1]   == "lw" or "sw" or "beq":
             i_ty.run_i(i)
         elif label[0] or label[1]  == "jalr":
             j_ty.run_j(i)
-        elif label[0] or label[1]  == "halt" or "noop":
-            o_ty.run_o(i)
+        
         else:
             break   
      

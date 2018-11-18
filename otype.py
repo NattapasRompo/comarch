@@ -1,7 +1,7 @@
 def run_o(otype):
 
-    code  = o.type.split()
-
+    code  = otype.split()
+    opcode=""
     if code [0] == "halt" :
         opcode == "110"
     elif code [0] == "noop" :
