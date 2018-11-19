@@ -5,7 +5,7 @@ import otype as o_ty
 #jalr 4 2->x0=pc+4 , x1=pc+imm
 def runcode (allcode):
     for i in allcode.readlines():
-        print(i)
+        #print(i)
         label =i.split()
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             o_ty.run_o(i)
@@ -15,7 +15,6 @@ def runcode (allcode):
             i_ty.run_i(i)
         elif label[0] or label[1]  == "jalr":
             j_ty.run_j(i)
-        
         else:
             break   
      

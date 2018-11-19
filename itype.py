@@ -1,15 +1,14 @@
 def run_i(itype):
     code  = itype.split()
     opcode=""
-    if code[0] == "lw" or "sw" or "beq":
-        if code[0] == "lw":
-            opcode == "010"
-            
-        elif code[0] == "sw":
-            opcode == "011"
-            
-        elif code[0] == "beq":
-            opcode == "100"
+    #print(code[0])
+    if code[0] == "lw":
+         opcode = "010"
+    elif code[0] == "sw":
+        opcode = "011"
+    elif code[0] == "beq":
+        opcode = "100"
+    else: print(code[0])
         
     regA = bin(int(code[1]))[2:].zfill(3)
     regB = bin(int(code[2]))[2:].zfill(3)
