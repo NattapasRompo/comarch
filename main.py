@@ -93,5 +93,4 @@ def runcode (allcode):
 
 
 #j_ty.run_j("start  jalr  4  3")
-#runcode(open('test.txt'))
-print(int("start"))
+runcode(open('test.txt'))
