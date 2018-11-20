@@ -38,30 +38,33 @@ def runcode (allcode):
             else : #print(findlabel(label[3],numline,nameline))
                 if numline[findlabel(label[3],numline,nameline)] != -9999 :
                     print(numline[findlabel(label[3],numline,nameline)])
-                    label[3]=numline[findlabel(label[3],numline,nameline)]
+                    label[3]=str(numline[findlabel(label[3],numline,nameline)])
+                    i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
                 else:
                     print("exit(0)")
             if label[4].isdigit() : gotdata = 'null' 
             else : #print(findlabel(label[4],numline,nameline))
                 if numline[findlabel(label[5],numline,nameline)] != -9999 :
                     print(numline[findlabel(label[4],numline,nameline)])
-                    label[4]=numline[findlabel(label[4],numline,nameline)]
+                    label[4]=str(numline[findlabel(label[4],numline,nameline)])
+                    i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
                 else : 
                     print("exit(0)")
             if label[5].isdigit() : gotdata = 'null' 
             else : #print(findlabel(label[5],numline,nameline))
                 if numline[findlabel(label[5],numline,nameline)] != -9999 :
                     print(numline[findlabel(label[5],numline,nameline)])
-                    label[5]=numline[findlabel(label[5],numline,nameline)]
+                    label[5]=str(numline[findlabel(label[5],numline,nameline)])
+                    i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
                 else:
                     print("exit(0)")
+            
         except IndexError:
             gotdata = 'null'        
 
-
-    for i in lineall:
+    #for i in lineall:
         #print(i)
-        label =i.split()
+        #label =i.split()
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             o_ty.run_o(i)
         elif (label[0] == "add" or label[1] == "add") or (label[0] == "nand" or label[1] == "nand"):
