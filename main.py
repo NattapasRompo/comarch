@@ -58,7 +58,7 @@ def runcode (allcode):
         except IndexError:
             gotdata = 'null'        
 
-"""
+
     for i in lineall:
         #print(i)
         label =i.split()
@@ -72,7 +72,7 @@ def runcode (allcode):
             j_ty.run_j(i)
         else:
             break   
-     """
+
 
 #j_ty.run_j("start  jalr  4  3")
 runcode(open('test.txt'))
