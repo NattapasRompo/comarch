@@ -3,6 +3,8 @@ def run_r(rtype):
     code  = rtype.split()
     opcode = ""
     
+    564646464
+    
     if code[0] == "add" or code[0] == "nand"   :
         if code [0] == "add":
             opcode = "000"
