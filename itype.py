@@ -1,6 +1,10 @@
 def run_i(itype):
     code  = itype.split()
     opcode=""
+    machine=""
+    
+    
+
     
     if (code[0] == "lw" or code[0] == "sw" or code[0] == "beq") and (code[1] != "lw" or code[1] != "sw" or code[1] != "beq") :
         
@@ -39,7 +43,8 @@ def run_i(itype):
         if code[4].isdigit() :
             offset = bin(int(code[4]))[2:].zfill(16)
         else :
-            offset = code[4]
+            if int(code[4])<0 :
+                offset = bin(int(code[4])&0b1111111111111111)
         machine = code[0] + "\t" + opcode + "\t" + regA + "\t" + regB + "\t" + offset
 
     
