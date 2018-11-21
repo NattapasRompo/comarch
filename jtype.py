@@ -2,7 +2,7 @@
 def run_j(jtype):
     code  = jtype.split()
     opcode = "101"
-    
+    machine=""
     if code[0] == "jalr":
         regA = bin(int(code[1]))[2:].zfill(3)
         regB = bin(int(code[2]))[2:].zfill(3)
