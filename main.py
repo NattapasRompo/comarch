@@ -1,7 +1,8 @@
 import jtype as j_ty
 import itype as i_ty
 import rtype as r_ty
-import otype as o_ty    
+import otype as o_ty   
+import fill as fill_ty 
 #jalr 4 2->x0=pc+4 , x1=pc+imm
 def findlabel(la,namel):
     j=0
@@ -87,6 +88,8 @@ def runcode (allcode):
             i_ty.run_i(i)
         elif label[0] or label[1]  == "jalr":
             j_ty.run_j(i)
+        elif label[1] == ".fill" :
+            fill_ty.run_fill(i)
         else:
             break   
         countline+=1
@@ -94,4 +97,3 @@ def runcode (allcode):
 
 #j_ty.run_j("start  jalr  4  3")
 runcode(open('test.txt'))
-print(bin(-1 & 0b1111111111111111))
