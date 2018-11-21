@@ -19,7 +19,7 @@ def run_j(jtype):
         change = opcode+regA+regB+notuse
 
     #print(machine)
-    print(int(change,2))
+    #print(int(change,2))
     return int(change,2)
      
     
