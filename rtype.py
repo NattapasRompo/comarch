@@ -37,5 +37,5 @@ def run_r(rtype):
         change = opcode+regA+regB+notuse+destreg
     
     #print(machine)
-    print(int(change,2))
+    #print(int(change,2))
     return int(change,2)

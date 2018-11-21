@@ -51,6 +51,6 @@ def run_i(itype):
     
 
     #print(machine)
-    print(int(change,2))
+    #print(int(change,2))
     return int(change,2)
 
