@@ -14,6 +14,15 @@ def findlabel(la,namel):
 def findoffset(i,numline,nameline,countline):
     label =i.split()
     try:
+        if label[2].isdigit() : gotdata = 'null' 
+        else : 
+            if numline[findlabel(label[2],nameline)] != -9999 :
+                #print(numline[findlabel(label[5],nameline)])
+                if label[1] == ".fill":
+                    label[2]=str(numline[findlabel(label[2],nameline)])
+                i=label[0]+"\t"+label[1]+"\t"+label[2]
+            else:
+                print("exit(1)") 
         if label[3].isdigit() : gotdata = 'null' 
         else : 
             if numline[findlabel(label[3],nameline)] != -9999 :
@@ -82,14 +91,14 @@ def runcode (allcode):
 
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             o_ty.run_o(i)
+        elif label[1] == ".fill" :
+            fill_ty.run_fill(i)
         elif (label[0] == "add" or label[1] == "add") or (label[0] == "nand" or label[1] == "nand"):
             r_ty.run_r(i)
         elif (label[0] == "lw" or label[1] == "lw") or (label[0] == "sw" or label[1] == "sw") or (label[0] == "beq" or label[1] == "beq"):
             i_ty.run_i(i)
         elif label[0] or label[1]  == "jalr":
             j_ty.run_j(i)
-        elif label[1] == ".fill" :
-            fill_ty.run_fill(i)
         else:
             break   
         countline+=1
