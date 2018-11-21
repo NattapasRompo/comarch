@@ -1,9 +1,6 @@
 def run_i(itype):
     code  = itype.split()
     opcode=""
-    machine=""
-    uu=""
-    
     
     if (code[0] == "lw" or code[0] == "sw" or code[0] == "beq") and (code[1] != "lw" or code[1] != "sw" or code[1] != "beq") :
         
