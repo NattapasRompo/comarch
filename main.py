@@ -3,61 +3,65 @@ import itype as i_ty
 import rtype as r_ty
 import otype as o_ty   
 import fill as fill_ty 
+import sys
 #jalr 4 2->x0=pc+4 , x1=pc+imm
-def findlabel(la,namel):
+def findsameLabel(nameline):
+    i=0
+    while(i<len(nameline)):
+        j=i+1
+        while (j < len(nameline)) :
+            if nameline[i] == nameline[j] : sys.exit("exit(1)")
+            j+=1
+        i=i+1
+
+def findlabel(la,namel,isfill):
     j=0
+    err=99999
     for i in namel:
         if la == i: return j
         j+=1
-    return -9999 
+    if isfill != 2 :
+        sys.exit("exit(1)")
+    else : return 99999
 
 def findoffset(i,numline,nameline,countline):
     label =i.split()
     try:
-        if label[2].isdigit() : gotdata = 'null' 
-        else : 
-            if numline[findlabel(label[2],nameline)] != -9999 :
-                #print(numline[findlabel(label[5],nameline)])
+        if label[2].isdigit() == False :
+            if numline[findlabel(label[2],nameline,2)] != 99999 :
                 if label[1] == ".fill":
-                    label[2]=str(numline[findlabel(label[2],nameline)])
+                    label[2]=str(numline[findlabel(label[2],nameline,2)])
                 i=label[0]+"\t"+label[1]+"\t"+label[2]
-            else:
-                print("exit(1)") 
-        if label[3].isdigit() : gotdata = 'null' 
-        else : 
-            if numline[findlabel(label[3],nameline)] != -9999 :
-                #print(numline[findlabel(label[3],nameline)])
+
+
+        if label[3].isdigit() == False :
+            if numline[findlabel(label[3],nameline,3)] != 99999 :
                 if label[0] == "beq" or label[1] == "beq":
-                    label[3]=str(numline[findlabel(label[3],nameline)]-1-countline)
+                    label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
                 else :
-                    label[3]=str(numline[findlabel(label[3],nameline)])
+                    label[3]=str(numline[findlabel(label[3],nameline,3)])
                 i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
-            else:
-                print("exit(1)")
 
-        if label[4].isdigit() : gotdata = 'null' 
-        else : 
-            if numline[findlabel(label[5],nameline)] != -9999 :
-                #print(numline[findlabel(label[4],nameline)])
+                
+
+        if label[4].isdigit() == False :
+            if numline[findlabel(label[5],nameline,4)] != 99999 :
                 if label[0] == "beq" or label[1] == "beq":
-                    label[4]=str(numline[findlabel(label[4],nameline)]-1-countline)
+                    label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
                 else :
-                    label[4]=str(numline[findlabel(label[4],nameline)])
+                    label[4]=str(numline[findlabel(label[4],nameline,4)])
                 i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
-            else : 
-                print("exit(1)")
 
-        if label[5].isdigit() : gotdata = 'null' 
-        else : 
-            if numline[findlabel(label[5],nameline)] != -9999 :
-                #print(numline[findlabel(label[5],nameline)])
+
+        if label[5].isdigit() == False :
+            if numline[findlabel(label[5],nameline,5)] != 99999 :
                 if label[0] == "beq" or label[1] == "beq":
-                    label[5]=str(numline[findlabel(label[5],nameline)]-1-countline)
+                    label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
                 else :
-                    label[5]=str(numline[findlabel(label[5],nameline)])
+                    label[5]=str(numline[findlabel(label[5],nameline,5)])
                 i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
-            else:
-                print("exit(1)")       
+                
+
     except IndexError:
             gotdata = 'null'        
     return i
@@ -73,19 +77,17 @@ def runcode (allcode):
     for j in lineall:
         line =j.split()
         if line[0] != "add" and line[0] != "nand" and line[0] != "lw"  and line[0] != "sw" and line[0] != "beq" and line[0] !="jalr" and line[0] != "halt" and line[0] != "noop":
-            #print("----------------------------------------------------------")
-            #print(count)
-            #print(line[0])
             numline.append(count)
             nameline.append(line[0])
             count2 += 1
-            #print("----------------------------------------------------------")
         count += 1
+        
+    findsameLabel(nameline)
     
-
     #print(allcode)  
     countline=0
     for i in lineall:
+        #print(i)
         label =i.split()
         i=findoffset(i,numline,nameline,countline)    
 
@@ -93,22 +95,22 @@ def runcode (allcode):
             txt = txt + str(o_ty.run_o(i)) +"\n"
         elif label[1] == ".fill" :
             txt = txt + str(fill_ty.run_fill(i))+"\n"
-        elif (label[0] == "add" or label[1] == "add") or (label[0] == "nand" or label[1] == "nand"):
+        elif label[0] == "add" or label[1] == "add" or label[0] == "nand" or label[1] == "nand":
             txt = txt + str(r_ty.run_r(i))+"\n"
-        elif (label[0] == "lw" or label[1] == "lw") or (label[0] == "sw" or label[1] == "sw") or (label[0] == "beq" or label[1] == "beq"):
+        elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw" or label[0] == "beq" or label[1] == "beq":
             txt = txt + str(i_ty.run_i(i))+"\n"
-        elif label[0] or label[1]  == "jalr":
+        elif label[0] == "jalr" or label[1]  == "jalr":
             txt = txt + str(j_ty.run_j(i))+"\n"
         else:
-            break   
+            sys.exit("exit(1)")  
         countline+=1
-    
+ 
     return txt
 
 
 #j_ty.run_j("start  jalr  4  3")
 
-#print(runcode(open('test.txt')))
+#runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
 text_file.write(runcode(open('test.txt')))
 text_file.close()
