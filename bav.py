@@ -63,14 +63,15 @@ def BehavSimulate (maccode):
                                 reg[indB]=pc+1
                                 pc=reg[indA]
                 elif opcode =="110":
-                        ishalt=True
-                        pc+=1   
-                        break
-                
+                    ishalt=True
+                    pc+=1   
+                    break
+              
                 print("reg :")
                 for x in range(len(reg)) :
                        print("memmory [" + str(x) + "] = "+str(reg[x]) )     
-                print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd)           
+                print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd) 
+
 
 BehavSimulate(open('text1.txt'))
 
