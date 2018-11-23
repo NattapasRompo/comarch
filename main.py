@@ -14,6 +14,15 @@ def findlabel(la,namel):
 def findoffset(i,numline,nameline,countline):
     label =i.split()
     try:
+        if label[2].isdigit() : gotdata = 'null' 
+        else : 
+            if numline[findlabel(label[2],nameline)] != -9999 :
+                #print(numline[findlabel(label[5],nameline)])
+                if label[1] == ".fill":
+                    label[2]=str(numline[findlabel(label[2],nameline)])
+                i=label[0]+"\t"+label[1]+"\t"+label[2]
+            else:
+                print("exit(1)") 
         if label[3].isdigit() : gotdata = 'null' 
         else : 
             if numline[findlabel(label[3],nameline)] != -9999 :
@@ -60,9 +69,9 @@ def runcode (allcode):
     count2 = 0
     numline=[] 
     nameline=[]
+    txt=""
     for j in lineall:
         line =j.split()
-        
         if line[0] != "add" and line[0] != "nand" and line[0] != "lw"  and line[0] != "sw" and line[0] != "beq" and line[0] !="jalr" and line[0] != "halt" and line[0] != "noop":
             #print("----------------------------------------------------------")
             #print(count)
@@ -81,20 +90,29 @@ def runcode (allcode):
         i=findoffset(i,numline,nameline,countline)    
 
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
-            o_ty.run_o(i)
+
+            txt = txt + str(o_ty.run_o(i)) +"\n"
         elif label[1] == ".fill" :
-            fill_ty.run_fill(i)
+            txt = txt + str(fill_ty.run_fill(i))+"\n"
+
         elif (label[0] == "add" or label[1] == "add") or (label[0] == "nand" or label[1] == "nand"):
-            r_ty.run_r(i)
+            txt = txt + str(r_ty.run_r(i))+"\n"
         elif (label[0] == "lw" or label[1] == "lw") or (label[0] == "sw" or label[1] == "sw") or (label[0] == "beq" or label[1] == "beq"):
-            i_ty.run_i(i)
+            txt = txt + str(i_ty.run_i(i))+"\n"
         elif label[0] or label[1]  == "jalr":
-            j_ty.run_j(i)
-        
+
+            txt = txt + str(j_ty.run_j(i))+"\n"
+
         else:
             break   
         countline+=1
+    
+    return txt
 
 
 #j_ty.run_j("start  jalr  4  3")
-runcode(open('test.txt'))
+
+#print(runcode(open('test.txt')))
+text_file = open("Output.txt", "w")
+text_file.write(runcode(open('test.txt')))
+text_file.close()
