@@ -1,0 +1,19 @@
+        lw      0   1   mcand
+        lw      0   2   mplier
+        add     0   0   5
+        lw      0   3   pos1
+        nand    0   0   4
+        lw      0   7   maxloop 
+Hi      nand    1   3   6
+        beq     4   6   some
+        add     5   1   5
+some    add     1   1   1
+        add     3   3   3   
+        beq     3   7   end
+        beq     0   0   Hi
+        noop
+end     halt
+mcand   .fill   2
+mplier  .fill   3
+pos1    .fill   1
+maxloop .fill   16384
