@@ -10,6 +10,12 @@ def findlabel(la,numl,namel):
         j+=1
     return -9999
 
+def twos_comp(val, bits):
+    """compute the 2's complement of int value val"""
+    if (val & (1 << (bits - 1))) != 0: # if sign bit is set e.g., 8bit: 128-255
+        val = val - (1 << bits)        # compute negative value
+    return val                         # return positive value as is
+
 def BehavSimulate (maccode):
         memory=[]
         reg=[0,0,0,0,0,0,0,0]
@@ -22,11 +28,10 @@ def BehavSimulate (maccode):
 
         while 1 :
                 
-                print("state")
-                print("PC "+str(pc))
+                print("state "+"PC "+str(pc))
 
                 binary=bin(int(memory[pc]))[2:].zfill(32)
-                print(binary)
+                # print(binary)
                 opcode=binary[7:10] #bit 24-22 
                 regA=binary[10:13] #bit 24-22 
                 regB=binary[13:16] #bit 24-22 
@@ -35,15 +40,18 @@ def BehavSimulate (maccode):
                 indA=int(binary[10:13],2)  #bit 21-19
                 indB=int(binary[13:16],2)  #bit 18-16
                 indrd=int(binary[29:32],2)    #bit 2-0
-                offsetField=int(binary[16:32],2)
+                if  binary[16] == "1" :
+                    offsetField=int(binary[16:32],2)-(1<<16)
+                else :
+                    offsetField=int(binary[16:32],2)
 
-
+                # print(offsetField)
 
                 if(opcode == "000"): #and
                         reg[indrd]=reg[indA]+reg[indB]  
                         pc+=1                 
                 elif opcode == "001": #Nand
-                        reg[indrd]=~(reg[indA]&reg[indB])
+                        reg[indrd]=not (reg[indA] and reg[indB])
                         pc+=1   
                 elif opcode == "010": #lw
                         reg[indB]=int(memory[reg[indA]+offsetField])
@@ -52,8 +60,8 @@ def BehavSimulate (maccode):
                         memory[reg[indA]+offsetField]=str(reg[indB])
                         pc+=1   
                 elif opcode == "100": #beq
-                        if reg[indA] == regB[indB]:
-                                pc=pc+offsetField+1 
+                        if reg[indA] == reg[indB]:
+                            pc=pc+offsetField+1 
                         else: pc=pc+1
                 elif opcode == "101": #jalr
                         if reg[indA]==reg[indB]:
@@ -63,19 +71,17 @@ def BehavSimulate (maccode):
                                 reg[indB]=pc+1
                                 pc=reg[indA]
                 elif opcode =="110":
-                        ishalt=True
-                        pc+=1   
-                        break
-                
-                
-                # print("memmory :")
-                # for x in range(len(memory)) :
-                #        print("memmory [" + str(x) + "] = "+str(memory[x]) )
-                
+                    ishalt=True
+                    pc+=1   
+                    break
+                else : pc+=1
+              
                 print("reg :")
                 for x in range(len(reg)) :
-                       print("memmory [" + str(x) + "] = "+str(reg[x]) )     
-                print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd) 
+                       print("reg[" + str(x) + "] = "+str(reg[x]) )    
+                print("-------------------------------------------") 
+                # print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd) 
+
 
 BehavSimulate(open('text1.txt'))
 
