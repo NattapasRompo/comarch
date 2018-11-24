@@ -34,13 +34,12 @@ def findoffset(i,numline,nameline,countline):
                 i=label[0]+"\t"+label[1]+"\t"+label[2]
 
 
-        if label[3].isdigit() == False :
-            if numline[findlabel(label[3],nameline,3)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
-                else :
-                    label[3]=str(numline[findlabel(label[3],nameline,3)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
+         if label[3].isdigit() == False :
+                if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+                label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
+            else :
+                label[3]=str(numline[findlabel(label[3],nameline,3)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
 
                 
 
