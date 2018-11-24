@@ -34,8 +34,8 @@ def findoffset(i,numline,nameline,countline):
                 i=label[0]+"\t"+label[1]+"\t"+label[2]
 
 
-         if label[3].isdigit() == False :
-                if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+        if label[3].isdigit() == False :
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
                 label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
             else :
                 label[3]=str(numline[findlabel(label[3],nameline,3)])
@@ -44,23 +44,20 @@ def findoffset(i,numline,nameline,countline):
                 
 
         if label[4].isdigit() == False :
-            if numline[findlabel(label[5],nameline,4)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
-                else :
-                    label[4]=str(numline[findlabel(label[4],nameline,4)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+                label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
+            else :
+                label[4]=str(numline[findlabel(label[4],nameline,4)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
 
 
         if label[5].isdigit() == False :
-            if numline[findlabel(label[5],nameline,5)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
-                else :
-                    label[5]=str(numline[findlabel(label[5],nameline,5)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+                label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
+            else :
+                label[5]=str(numline[findlabel(label[5],nameline,5)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
                 
-
 
     except IndexError:
             gotdata = 'null'        
