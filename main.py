@@ -61,6 +61,7 @@ def findoffset(i,numline,nameline,countline):
                 i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
                 
 
+
     except IndexError:
             gotdata = 'null'        
     return i
