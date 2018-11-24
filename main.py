@@ -28,38 +28,33 @@ def findoffset(i,numline,nameline,countline):
     label =i.split()
     try:
         if label[2].isdigit() == False :
-            if numline[findlabel(label[2],nameline,2)] != 99999 :
-                if label[1] == ".fill":
-                    label[2]=str(numline[findlabel(label[2],nameline,2)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]
+            if label[1] == ".fill":
+                label[2]=str(numline[findlabel(label[2],nameline,2)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]
 
 
         if label[3].isdigit() == False :
-            if numline[findlabel(label[3],nameline,3)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
-                else :
-                    label[3]=str(numline[findlabel(label[3],nameline,3)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
+            if label[0] == "beq" or label[1] == "beq":
+                label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
+            else :
+                label[3]=str(numline[findlabel(label[3],nameline,3)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
 
                 
-
         if label[4].isdigit() == False :
-            if numline[findlabel(label[5],nameline,4)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
-                else :
-                    label[4]=str(numline[findlabel(label[4],nameline,4)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
+            if label[0] == "beq" or label[1] == "beq":
+                label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
+            else :
+                label[4]=str(numline[findlabel(label[4],nameline,4)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
 
 
         if label[5].isdigit() == False :
-            if numline[findlabel(label[5],nameline,5)] != 99999 :
-                if label[0] == "beq" or label[1] == "beq":
-                    label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
-                else :
-                    label[5]=str(numline[findlabel(label[5],nameline,5)])
-                i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
+            if label[0] == "beq" or label[1] == "beq":
+                label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
+            else :
+                label[5]=str(numline[findlabel(label[5],nameline,5)])
+            i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
                 
 
     except IndexError:
@@ -89,7 +84,7 @@ def runcode (allcode):
     for i in lineall:
         #print(i)
         label =i.split()
-        i=findoffset(i,numline,nameline,countline)    
+        i=findoffset(i,numline,nameline,countline) 
 
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             txt = txt + str(o_ty.run_o(i)) +"\n"
@@ -110,7 +105,7 @@ def runcode (allcode):
 
 #j_ty.run_j("start  jalr  4  3")
 
-#runcode(open('test.txt'))
+#runcode(open('test2.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('test.txt')))
-text_file.close()
+text_file.write(runcode(open('test2.txt')))
+text_file.close
