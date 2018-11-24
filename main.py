@@ -10,7 +10,7 @@ def findsameLabel(nameline):
     while(i<len(nameline)):
         j=i+1
         while (j < len(nameline)) :
-            if nameline[i] == nameline[j] : sys.exit("exit(1)")
+            if nameline[i] == nameline[j] : sys.exit("exit(1) --- samelabel")
             j+=1
         i=i+1
 
@@ -21,7 +21,7 @@ def findlabel(la,namel,isfill):
         if la == i: return j
         j+=1
     if isfill != 2 :
-        sys.exit("exit(1)")
+        sys.exit("exit(1) --- not have label")
     else : return 99999
 
 def findoffset(i,numline,nameline,countline):
@@ -34,7 +34,7 @@ def findoffset(i,numline,nameline,countline):
 
 
         if label[3].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq":
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
                 label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
             else :
                 label[3]=str(numline[findlabel(label[3],nameline,3)])
@@ -42,7 +42,7 @@ def findoffset(i,numline,nameline,countline):
 
                 
         if label[4].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq":
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
                 label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
             else :
                 label[4]=str(numline[findlabel(label[4],nameline,4)])
@@ -50,7 +50,7 @@ def findoffset(i,numline,nameline,countline):
 
 
         if label[5].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq":
+            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
                 label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
             else :
                 label[5]=str(numline[findlabel(label[5],nameline,5)])
@@ -85,6 +85,7 @@ def runcode (allcode):
         #print(i)
         label =i.split()
         i=findoffset(i,numline,nameline,countline) 
+        
 
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             txt = txt + str(o_ty.run_o(i)) +"\n"
@@ -105,7 +106,7 @@ def runcode (allcode):
 
 #j_ty.run_j("start  jalr  4  3")
 
-#runcode(open('test2.txt'))
+#runcode(open('combination.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('test2.txt')))
+text_file.write(runcode(open('combination.txt')))
 text_file.close
