@@ -18,7 +18,7 @@ def run_j(jtype):
         machine = code[0] + "\t" + opcode + "\t" + regA + "\t" + regB + "\t" + notuse
         change = opcode+regA+regB+notuse
 
-    #print(machine)
+    #print(change)
     #print(int(change,2))
     return int(change,2)
      

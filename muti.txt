@@ -10,7 +10,7 @@ Hi      nand    2   3   6
 some    add     5   5   5
         add     3   3   3   
         beq     3   7   end
-        beq     0   0   Hi
+        beq     0   0   Hi    
         noop
 end     halt
 mcand   .fill   3

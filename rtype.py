@@ -36,6 +36,6 @@ def run_r(rtype):
         machine = code[0] +"\t" + opcode + "\t" + regA + "\t" + regB + "\t" + notuse + "\t" +destreg 
         change = opcode+regA+regB+notuse+destreg
     
-    #print(machine)
+    #print(change)
     #print(int(change,2))
     return int(change,2)
