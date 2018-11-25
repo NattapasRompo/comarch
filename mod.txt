@@ -1,0 +1,20 @@
+        nand    0   0   6   
+        lw      0   7   negative
+        lw      0   2   divisor
+        lw      0   1   dividend
+        nand    2   2   2
+        lw      0   3   pos1
+        add     2   3   2
+        add     0   1   4
+loop    add     4   2   4   
+        nand    4   7   3
+        beq     6   3   some
+        beq     0   0   end
+some    add     0   4   1
+        beq     0   0   loop
+        noop
+end     halt    
+pos1        .fill   1
+divisor     .fill   3
+dividend    .fill   230
+negative    .fill   2147483648
