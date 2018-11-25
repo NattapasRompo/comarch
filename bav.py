@@ -45,17 +45,20 @@ def BehavSimulate (maccode):
                 else :
                     offsetField=int(binary[16:32],2)
 
-                # print(offsetField)
+                print(offsetField)
 
                 if(opcode == "000"): #and
                         reg[indrd]=reg[indA]+reg[indB]  
                         pc+=1                 
                 elif opcode == "001": #Nand
-                        reg[indrd]=not (reg[indA] and reg[indB])
+                        reg[indrd]= ~ (reg[indA] & reg[indB])
                         pc+=1   
                 elif opcode == "010": #lw
-                        reg[indB]=int(memory[reg[indA]+offsetField])
-                        pc+=1   
+                        try :
+                                reg[indB]=int(memory[reg[indA]+offsetField])
+                                pc+=1
+                        except IndexError :
+                                print("index ")   
                 elif opcode == "011": #sw
                         memory[reg[indA]+offsetField]=str(reg[indB])
                         pc+=1   
@@ -80,7 +83,7 @@ def BehavSimulate (maccode):
                 for x in range(len(reg)) :
                        print("reg[" + str(x) + "] = "+str(reg[x]) )    
                 print("-------------------------------------------") 
-                # print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd) 
+                print("opcode = ",opcode," reg A = ",regA," reg B = ",regB," rd = ",rd) 
 
 
-BehavSimulate(open('test1.txt'))
+BehavSimulate(open('Output.txt'))

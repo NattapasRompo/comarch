@@ -35,8 +35,10 @@ def findoffset(i,numline,nameline,countline):
 
 
         if label[3].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+            if label[0] == "beq" or label[1] == "beq" :
                 label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
+            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw" :
+                label[3]=str(numline[findlabel(label[3],nameline,3)]-int(label[1]))
             else :
                 label[3]=str(numline[findlabel(label[3],nameline,3)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
@@ -44,16 +46,20 @@ def findoffset(i,numline,nameline,countline):
                 
 
         if label[4].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+            if label[0] == "beq" or label[1] == "beq" :
                 label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
+            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw" :
+                label[4]=str(numline[findlabel(label[4],nameline,4)]-int(label[2]))
             else :
                 label[4]=str(numline[findlabel(label[4],nameline,4)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
 
 
         if label[5].isdigit() == False :
-            if label[0] == "beq" or label[1] == "beq" or label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+            if label[0] == "beq" or label[1] == "beq" :
                 label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
+            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
+                label[5]=str(numline[findlabel(label[5],nameline,5)]-int(label[3]))
             else :
                 label[5]=str(numline[findlabel(label[5],nameline,5)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
@@ -76,6 +82,9 @@ def runcode (allcode):
         if line[0] != "add" and line[0] != "nand" and line[0] != "lw"  and line[0] != "sw" and line[0] != "beq" and line[0] !="jalr" and line[0] != "halt" and line[0] != "noop":
             numline.append(count)
             nameline.append(line[0])
+            #print(count)
+            #print(line[0])
+            #print("---------------")
             count2 += 1
         count += 1
         
@@ -87,7 +96,7 @@ def runcode (allcode):
         #print(i)
         label =i.split()
         i=findoffset(i,numline,nameline,countline)    
-
+        print(i)
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             txt = txt + str(o_ty.run_o(i)) +"\n"
         elif label[1] == ".fill" :
@@ -109,5 +118,5 @@ def runcode (allcode):
 
 #runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('test.txt')))
+text_file.write(runcode(open('muti.txt')))
 text_file.close()
