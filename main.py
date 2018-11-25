@@ -112,5 +112,5 @@ def runcode (allcode):
 
 #runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('mod.txt')))
+text_file.write(runcode(open('warp.txt')))
 text_file.close()

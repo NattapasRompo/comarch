@@ -71,17 +71,17 @@ def BehavSimulate (maccode):
                         except IndexError :
                                 print("index ")  
                 elif opcode == "011": #sw
-                        try :
-                                memory[reg[indA]+offsetField]=str(reg[indB])
-                        except IndexError :
+                        if(reg[indA]+offsetField>len(memory)-1) :
                                 memory.append(str(reg[indB]))
+                        else:                                
+                                memory[reg[indA]+offsetField]=str(reg[indB])
                         pc+=1  
                 elif opcode == "100": #beq
                         if reg[indA] == reg[indB]:
                             pc=pc+offsetField+1
                         else: pc=pc+1
                 elif opcode == "101": #jalr
-                        if reg[indA]==reg[indB]:
+                        if indA==indB:
                                 reg[indB]=pc+1
                                 pc=pc+1
                         else:
