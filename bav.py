@@ -1,21 +1,8 @@
-import jtype as j_ty
-import itype as i_ty
-import rtype as r_ty
-import otype as o_ty    
- 
 memory=[]
 reg=[0,0,0,0,0,0,0,0]
 count=0
 pc=0  
- 
- 
-def findlabel(la,numl,namel):
-    j=0
-    for i in namel:
-        if la == i: return j
-        j+=1
-    return -9999
-                       # return positive value as is
+      # return positive value as is
 def printState():
         global memory
         global reg

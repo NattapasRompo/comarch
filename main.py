@@ -105,6 +105,7 @@ def runcode (allcode):
             sys.exit("exit(1)")  
         countline+=1
  
+    print("exit(0)")  
     return txt
 
 
@@ -112,5 +113,5 @@ def runcode (allcode):
 
 #runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('warp.txt')))
+text_file.write(runcode(open('mod.txt')))
 text_file.close()
