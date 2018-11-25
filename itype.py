@@ -50,7 +50,7 @@ def run_i(itype):
         change = opcode+regA+regB+offset
     
 
-    #print(machine)
+    #print(change)
     #print(int(change,2))
     return int(change,2)
 

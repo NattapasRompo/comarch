@@ -37,8 +37,6 @@ def findoffset(i,numline,nameline,countline):
         elif label[3].isdigit() == False :
             if label[0] == "beq" or label[1] == "beq" :
                 label[3]=str(numline[findlabel(label[3],nameline,3)]-1-countline)
-            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw" :
-                label[3]=str(numline[findlabel(label[3],nameline,3)]-int(label[1]))
             else :
                 label[3]=str(numline[findlabel(label[3],nameline,3)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]
@@ -48,8 +46,6 @@ def findoffset(i,numline,nameline,countline):
         elif label[4].isdigit() == False :
             if label[0] == "beq" or label[1] == "beq" :
                 label[4]=str(numline[findlabel(label[4],nameline,4)]-1-countline)
-            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw" :
-                label[4]=str(numline[findlabel(label[4],nameline,4)]-int(label[2]))
             else :
                 label[4]=str(numline[findlabel(label[4],nameline,4)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]
@@ -58,8 +54,6 @@ def findoffset(i,numline,nameline,countline):
         elif label[5].isdigit() == False :
             if label[0] == "beq" or label[1] == "beq" :
                 label[5]=str(numline[findlabel(label[5],nameline,5)]-1-countline)
-            elif label[0] == "lw" or label[1] == "lw" or label[0] == "sw" or label[1] == "sw":
-                label[5]=str(numline[findlabel(label[5],nameline,5)]-int(label[3]))
             else :
                 label[5]=str(numline[findlabel(label[5],nameline,5)])
             i=label[0]+"\t"+label[1]+"\t"+label[2]+"\t"+label[3]+"\t"+label[4]+"\t"+label[5]
@@ -118,5 +112,5 @@ def runcode (allcode):
 
 #runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('com.txt')))
+text_file.write(runcode(open('mod.txt')))
 text_file.close()

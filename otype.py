@@ -12,7 +12,7 @@ def run_o(otype):
     notuse= "0000000000000000000000"  
     machine = "\t" + opcode + "\t" + notuse 
     change = opcode+notuse
-    #print(machine)
+    #print(change)
     #print(int(change,2))
     return int(change,2)
 
