@@ -90,7 +90,7 @@ def runcode (allcode):
         #print(i)
         label =i.split()
         i=findoffset(i,numline,nameline,countline)    
-        print(i)
+        #print(i)
         if label[0]  == "halt" or label[0]  == "noop" or label[1] == "halt":
             txt = txt + str(o_ty.run_o(i)) +"\n"
         elif label[1] == ".fill" :
@@ -113,5 +113,5 @@ def runcode (allcode):
 
 #runcode(open('test.txt'))
 text_file = open("Output.txt", "w")
-text_file.write(runcode(open('mod.txt')))
+text_file.write(runcode(open('com.txt')))
 text_file.close()
